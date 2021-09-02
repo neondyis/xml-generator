@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="urn:itv:metadata:20141030" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:itv="urn:itv:metadata:20141030">
+
+    <complexType name="BundlesType">
+        <annotation>
+            <documentation>A collection of Bundle's with a common video source</documentation>
+        </annotation>
+        <sequence>
+            <element name="Bundle" type="itv:BundleType" maxOccurs="unbounded" minOccurs="1"></element>
+        </sequence>
+    </complexType>
+
+    <complexType name="BundleType">
+        <annotation>
+            <documentation>A grouping of output renditions to form a deliverable package</documentation>
+        </annotation>
+        <sequence>
+            <element name="BundleCode" type="string" maxOccurs="1" minOccurs="1"></element>
+            <element name="ProductionNumber" type="string" maxOccurs="1" minOccurs="1"></element>
+            <element name="AssetDuration" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern value="\d{2}:\d{2}:\d{2}:\d{2}@\d{2}"></pattern>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ServerName" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="Source" maxOccurs="1" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="Catch Up"></enumeration>
+                        <enumeration value="CDM Catch Up"></enumeration>
+                        <enumeration value="CDM Content Store"></enumeration>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="LateAndLive" maxOccurs="1" minOccurs="1">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="TRUE"></enumeration>
+                        <enumeration value="FALSE"></enumeration>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="AssetLocation" type="string" maxOccurs="1" minOccurs="1"></element>
+            <element name="DeliveryType" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="DeliveryTypeVersion" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="SegmentDuration" type="int" maxOccurs="1" minOccurs="1"></element>
+            <element name="CodingName" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="CodingProfile" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="AudioLineUp" type="int" maxOccurs="1" minOccurs="0"></element>
+            <element name="AVRenditions" type="itv:AVRenditionsType" maxOccurs="1" minOccurs="1"></element>
+        </sequence>
+    </complexType>
+
+    <complexType name="AVRenditionsType">
+        <annotation>
+            <documentation>A grouping of video rendition's</documentation>
+        </annotation>
+        <sequence>
+            <element name="AVRendition" type="itv:AVRenditionType" maxOccurs="unbounded" minOccurs="1"></element>
+        </sequence>
+    </complexType>
+
+    <complexType name="AVRenditionType">
+        <annotation>
+            <documentation>A single video rendition and associated parameters</documentation>
+        </annotation>
+        <sequence>
+            <element name="Filename" type="string"></element>
+            <element name="VideoAttributes" type="itv:VideoAttributesType"></element>
+        </sequence>
+    </complexType>
+
+    <complexType name="VideoAttributesType">
+        <annotation>
+            <documentation>Parameters associated with the referenced video attribute</documentation>
+        </annotation>
+        <sequence>
+            <element name="FileChecksum" type="string"></element>
+            <element name="FileSize" type="long" maxOccurs="1" minOccurs="0"></element>
+            <element name="PictureDefinition" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="AspectRatio" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="Profile" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="Bitrate" type="int"></element>
+        </sequence>
+    </complexType>
+
+    <element name="Bundles" type="itv:BundlesType"></element>
+</schema>

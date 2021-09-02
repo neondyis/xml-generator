@@ -1,0 +1,85 @@
+{
+  "name": "bundle-xml-generator",
+  "productName": "bundle-xml-generator",
+  "version": "1.0.0",
+  "description": "XML Generator",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "make-mac": "electron-forge make --platform darwin",
+    "build-installer":"electron-builder",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "build": {
+    "appId": "bundle-xml-generator",
+    "win":{
+      "target": ["nsis"],
+      "icon": "src/assets/icons/icon.ico"
+    },
+    "nsis":{
+      "installerIcon":"src/assets/icons/icon.ico",
+      "uninstallerIcon":"src/assets/icons/icon.ico",
+      "uninstallDisplayName":"XML Generator",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "keywords": [],
+  "author": "kyle cunnison",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "asar": true
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "xml_generator"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "format": "ULFO"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "async": "^3.2.0",
+    "ffprobe-client": "^1.1.6",
+    "md5-file": "^5.0.0",
+    "xmlbuilder2": "^2.4.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron-builder": "^22.10.5",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron": "12.0.0"
+  }
+}

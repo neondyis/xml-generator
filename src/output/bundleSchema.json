@@ -1,0 +1,239 @@
+{
+  "$id": "bundleSchema_v3.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "This JSON Schema file was generated from bundleSchema_v3.xsd on Mon Mar 15 2021 18:00:15 GMT+0100 (Central European Standard Time).  For more information please see http://www.xsd2jsonschema.org",
+  "description": "Schema tag attributes: targetNamespace='urn:itv:metadata:20141030' xmlns:itv='urn:itv:metadata:20141030'",
+  "properties": {
+    "BundlesType": {
+      "$ref": "#/definitions/BundlesType"
+    },
+    "BundleType": {
+      "$ref": "#/definitions/BundleType"
+    },
+    "AVRenditionsType": {
+      "$ref": "#/definitions/AVRenditionsType"
+    },
+    "AVRenditionType": {
+      "$ref": "#/definitions/AVRenditionType"
+    },
+    "VideoAttributesType": {
+      "$ref": "#/definitions/VideoAttributesType"
+    },
+    "Bundles": {
+      "$ref": "#/definitions/BundlesType"
+    }
+  },
+  "type": "object",
+  "anyOf": [
+    {
+      "required": [
+        "BundlesType"
+      ]
+    },
+    {
+      "required": [
+        "BundleType"
+      ]
+    },
+    {
+      "required": [
+        "AVRenditionsType"
+      ]
+    },
+    {
+      "required": [
+        "AVRenditionType"
+      ]
+    },
+    {
+      "required": [
+        "VideoAttributesType"
+      ]
+    },
+    {
+      "required": [
+        "Bundles"
+      ]
+    }
+  ],
+  "definitions": {
+    "BundlesType": {
+      "description": "A collection of Bundle's with a common video source",
+      "required": [
+        "Bundle"
+      ],
+      "properties": {
+        "Bundle": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/BundleType"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/BundleType"
+              },
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "BundleType": {
+      "description": "A grouping of output renditions to form a deliverable package",
+      "required": [
+        "BundleCode",
+        "ProductionNumber",
+        "AssetDuration",
+        "LateAndLive",
+        "AssetLocation",
+        "SegmentDuration",
+        "AVRenditions"
+      ],
+      "properties": {
+        "BundleCode": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "ProductionNumber": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "AssetDuration": {
+          "allOf": [
+            {
+              "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+            },
+            {
+              "pattern": "d{2}:d{2}:d{2}:d{2}@d{2}"
+            }
+          ]
+        },
+        "ServerName": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "Source": {
+          "allOf": [
+            {
+              "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+            },
+            {
+              "enum": [
+                "Catch Up",
+                "CDM Catch Up",
+                "CDM Content Store"
+              ]
+            }
+          ]
+        },
+        "LateAndLive": {
+          "allOf": [
+            {
+              "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+            },
+            {
+              "enum": [
+                "TRUE",
+                "FALSE"
+              ]
+            }
+          ]
+        },
+        "AssetLocation": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "DeliveryType": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "DeliveryTypeVersion": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "SegmentDuration": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/int"
+        },
+        "CodingName": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "CodingProfile": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "AudioLineUp": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/int"
+        },
+        "AVRenditions": {
+          "$ref": "#/definitions/AVRenditionsType"
+        }
+      },
+      "type": "object"
+    },
+    "AVRenditionsType": {
+      "description": "A grouping of video rendition's",
+      "required": [
+        "AVRendition"
+      ],
+      "properties": {
+        "AVRendition": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AVRenditionType"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/AVRenditionType"
+              },
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "AVRenditionType": {
+      "description": "A single video rendition and associated parameters",
+      "required": [
+        "Filename",
+        "VideoAttributes"
+      ],
+      "properties": {
+        "Filename": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "VideoAttributes": {
+          "$ref": "#/definitions/VideoAttributesType"
+        }
+      },
+      "type": "object"
+    },
+    "VideoAttributesType": {
+      "description": "Parameters associated with the referenced video attribute",
+      "required": [
+        "FileChecksum",
+        "Bitrate"
+      ],
+      "properties": {
+        "FileChecksum": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "FileSize": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/long"
+        },
+        "PictureDefinition": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "AspectRatio": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "Profile": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/string"
+        },
+        "Bitrate": {
+          "$ref": "FORWARD_REFERENCE#/to/urn:itv:metadata:20141030/int"
+        }
+      },
+      "type": "object"
+    },
+    "Bundles": {
+      "$ref": "#/definitions/BundlesType"
+    }
+  }
+}
